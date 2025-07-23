@@ -8,9 +8,8 @@ This is a full-stack inventory management system built with a Laravel backend an
 
 *   **Framework:** Laravel 12
 *   **Language:** PHP 8.2
-*   **Database:** SQLite (by default)
+*   **Database:** MySQL
 *   **API Authentication:** Laravel Sanctum
-*   **Development Environment:** Laravel Sail (Docker)
 
 ### Frontend
 
@@ -24,8 +23,10 @@ This is a full-stack inventory management system built with a Laravel backend an
 
 ### Prerequisites
 
-*   Docker Desktop
+*   PHP >= 8.2
+*   Composer
 *   Node.js and npm
+*   MySQL
 
 ### Backend Setup
 
@@ -45,19 +46,30 @@ This is a full-stack inventory management system built with a Laravel backend an
     cp .env.example .env
     ```
 
-4.  **Start the development server:**
-    ```bash
-    ./vendor/bin/sail up
+4.  **Configure your `.env` file:**
+    Open `.env` and set the `DB_*` variables to point to your MySQL database.
+    ```ini
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=inventory_app
+    DB_USERNAME=root
+    DB_PASSWORD=
     ```
 
 5.  **Generate application key:**
     ```bash
-    ./vendor/bin/sail artisan key:generate
+    php artisan key:generate
     ```
 
 6.  **Run database migrations:**
     ```bash
-    ./vendor/bin/sail artisan migrate
+    php artisan migrate
+    ```
+
+7.  **Start the development server:**
+    ```bash
+    php artisan serve
     ```
 
 ### Frontend Setup
@@ -73,10 +85,7 @@ This is a full-stack inventory management system built with a Laravel backend an
     ```
 
 3.  **Set up environment file:**
-    ```bash
-    cp .env.example .env
-    ```
-    *Note: You may need to create a `.env.example` if one does not exist and configure the backend API URL.*
+    You may need to create a `.env` file if one does not exist and configure the backend API URL (e.g., `VITE_API_BASE_URL=http://localhost:8000`).
 
 4.  **Start the development server:**
     ```bash
@@ -85,5 +94,5 @@ This is a full-stack inventory management system built with a Laravel backend an
 
 ## Running the Project
 
-*   The Laravel backend will be accessible at `http://localhost`.
+*   The Laravel backend will be accessible at `http://localhost:8000`.
 *   The React frontend will be running on the port specified by Vite (usually `http://localhost:5173`).
